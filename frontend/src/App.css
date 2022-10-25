@@ -1,0 +1,52 @@
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+body, p, h1, h2, h3, h4, h5, h6, ol, ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+image {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  color: white;
+  background-color: #121212;
+  font-family: 'Mukta', sans-serif;
+}
+
+.aReset{
+  color: inherit;
+  text-decoration: inherit; /* no underline */
+}
+
+
+.container {
+  width: 1200px;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.flex{
+  display: flex;
+}
+.flexC{
+  display: flex;
+  flex-direction: column;
+}
+
+.flexCenter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
