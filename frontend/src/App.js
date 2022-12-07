@@ -1,8 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home/Home';
 import Navigation from './comonents/Navigation/Navbar';
+import Register from './pages/register/StepRegister';
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
     <Navigation/>
       <Routes>
         <Route path='/' element={<Home/>}/>
+        <Route path='/register' element={<Register/>}/>
       </Routes>
     </BrowserRouter>
   );

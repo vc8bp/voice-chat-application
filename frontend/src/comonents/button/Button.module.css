@@ -1,0 +1,25 @@
+.btn{
+    padding: 10px;
+    width: 250px;
+    max-width: 90%;
+    background-color: rgb(50, 50, 160);
+    border-radius: 1vmax;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    
+
+}
+.btn:hover {
+    background-color: rgb(36, 36, 158);
+    
+}
+
+.btn:hover > span {
+    padding-right: 10px;
+}
+
+span {
+    padding-right: 5px;
+    transition: all 0.3s ease-in-out;
+}

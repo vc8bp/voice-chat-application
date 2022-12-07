@@ -14,11 +14,3 @@
 .signinContainer a{
     margin-left: 10px;
 }
-.btn{
-    padding: 10px;
-    width: 250px;
-    max-width: 90%;
-    background-color: rgb(50, 50, 160);
-    border-radius: 1vmax;
-    color: #fff;
-}
