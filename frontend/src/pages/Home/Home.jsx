@@ -15,7 +15,7 @@ function Home() {
   }
   const navigate = useNavigate();
   const handleButton = () => {
-    navigate("/register")
+    navigate("/authenticate")
     console.log("button Clicked")
   }
 
@@ -28,7 +28,7 @@ function Home() {
                 <Button onClick={handleButton} text="Get your Username"/>
                 <div className={`flex ${styles.signinContainer}`} >
                     <p>Have an Invite?</p>
-                    <Link style={linkStyle}>Sign In</Link>
+                    <Link to="/" style={linkStyle}>Sign In</Link>
                 </div>
             </div> 
         </Card>
