@@ -9,3 +9,9 @@
     border-radius: 1vmax;
     padding: 30px;
 }
+.hedingWrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    
+}

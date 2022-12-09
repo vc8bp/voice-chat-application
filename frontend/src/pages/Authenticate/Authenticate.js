@@ -23,9 +23,15 @@ function Authenticate() {
   
   return (
     <div  className={`container flexCenter ${styles.main}`}>
+      {/* this is because i dont wont card component on emailPhone */}
+      {
+      step === 1 ? <Comp onNext={onNext}/>
+      :
       <Card title={authenticateStepsTitle[step]}>
         <Comp onNext={onNext}/>
-      </Card>   
+      </Card>  
+      }
+       
     </div>
   )
 }
