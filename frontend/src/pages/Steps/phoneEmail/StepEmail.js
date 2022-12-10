@@ -27,14 +27,17 @@ function StepEmail({onNext}) {
   const [type, setType] = useState("phone");
   const Comp = data[type].comp;
 
-  const [values, setValues] = useState({
-    data: "",
-    type: ""
-  });
+  const [values, setValues] = useState({data: "",type: ""});
 
   const handleClick = () => {
     console.log(values);
-    // onNext();
+    if (!values.data) {
+      //TODO:  Show Error
+      return console.log("this is empty")
+    }
+
+    //TODO : Create Api request
+    onNext();
   }
 
   return (
@@ -51,7 +54,7 @@ function StepEmail({onNext}) {
         </div>
 
         <Card img={data[type].img} title={data[type].title}> 
-          <Comp update={setValues}>StepEmail</Comp>
+          <Comp update={setValues} />
           <p>by entering your Email or Number you are agreeing our terms or services and privacy policy.</p>
           <Button text="Next" onClick={handleClick}></Button>
           

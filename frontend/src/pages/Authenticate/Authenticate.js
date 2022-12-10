@@ -4,6 +4,7 @@ import StepEmail from "../Steps/phoneEmail/StepEmail"
 import StepOtp from "../Steps/Otp/Otp"
 import Card from "../../comonents/Card/Card"
 import {authenticateStepsTitle} from '../../assets/stepsData'
+import lockLogo from '../../assets/images/lock.svg' 
 
 
 const steps = {
@@ -15,7 +16,6 @@ const steps = {
 function Authenticate() {
   const [step, setstep] = useState(1)
   const Comp = steps[step]
-
   const onNext = () => {
     if (step >= 2) return
     setstep(e => e + 1)
@@ -27,7 +27,7 @@ function Authenticate() {
       {
       step === 1 ? <Comp onNext={onNext}/>
       :
-      <Card title={authenticateStepsTitle[step]}>
+      <Card img={lockLogo} title={authenticateStepsTitle[step]}>
         <Comp onNext={onNext}/>
       </Card>  
       }

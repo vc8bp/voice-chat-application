@@ -1,0 +1,13 @@
+.inp {
+    background-color: #262626;
+    padding: 10px;
+    border-radius: 1vmin;
+    margin: 20px 0px;
+    width: 250px;
+    max-width: 95%;
+    text-align: center;
+}
+.linkWrapper :last-child {
+    color: rgb(100, 100, 160);
+    cursor: pointer;
+}

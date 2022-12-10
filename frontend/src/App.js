@@ -6,6 +6,8 @@ import Authenticate from './pages/Authenticate/Authenticate';
 import IsGuest from './PrivateRoutes/IsGuest';
 import Activate from './pages/Activate/Activate';
 import IsActivated from './PrivateRoutes/IsActivated';
+import IsPrivate from './PrivateRoutes/IsPrivate';
+import Room from './pages/Room/Room';
 
 function App() {
   return (
@@ -20,7 +22,10 @@ function App() {
         <Route element={<IsActivated/>}>
           <Route path='/activate' element={<Activate/>}/> 
         </Route>
-            
+
+        <Route element={<IsPrivate/>}>
+          <Route path='/rooms' element={<Room/>}/>
+        </Route>  
         
       </Routes>
     </BrowserRouter>
