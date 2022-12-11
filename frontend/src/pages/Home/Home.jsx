@@ -25,11 +25,7 @@ function Home() {
             <div className={`${styles.contentWrapper}`}>
                 <p>Voice chat apps allow you to communicate through audio messages, make app-to-app calls and send automated voice alerts just with an internet connection. It helps connect people across the globe from any device without the labor of typing text messages and emails.</p>
                 {/* <button className={`${styles.btn}`}>Get Your Username</button> */}
-                <Button onClick={handleButton} text="Get your Username"/>
-                <div className={`flex ${styles.signinContainer}`} >
-                    <p>Have an Invite?</p>
-                    <Link to="/" style={linkStyle}>Sign In</Link>
-                </div>
+                <Button onClick={handleButton} text="Let's Start"/>
             </div> 
         </Card>
     </div>

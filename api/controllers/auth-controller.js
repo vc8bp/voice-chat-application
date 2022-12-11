@@ -1,26 +1,65 @@
-const OtpService = require('../services/otp-service')
+const hashService = require('../services/hash-Service');
+const OtpService = require('../services/otp-service');
+const { findUser, createUser } = require('../services/user-Service');
+const User = require("../models/UserSchema");
+const { use } = require('../routes');
+const tokenService = require('../services/token-service');
 require('dotenv').config();
 
+//TODO: handle more errors
 class AuthController {
     async sendOtp(req, res){
         const { data, type } = req.body;
         if(!data || !type) return res.status(401).json({success: false, error: "please fill the all the feilds"})
 
         const otp = await OtpService.generateOtp()
+        const otpExpire = Date.now() + Number(process.env.OTP_EXPIRE_TIME);
+        const hashedOtp = await hashService.hashOtp(`${data}${otp}${otpExpire}`)
         
-        const otpExpire = Date.now() + process.env.OTP_EXPIRE_TIME;
     
 
         console.log(otp)
         if(type === "phone"){
-            const {data, status} = await OtpService.sendBySMS(data, otp)
-            res.status(status).json(data)
+            const resData = await OtpService.sendBySMS(data, otp)   
+            console.log(resData)
+            const finalData = {...resData.data, hash: `${hashedOtp}.${otpExpire}`}
+            res.status(resData.status).json(finalData)
             
         } else if (type === "email") {
             OtpService.sendByEmail(req,res, otp)
         }
     }
 
+
+    async otpVerify(req, res) {
+        const {emailOrPhone, hash, otp} = req.body;
+        const resData = await OtpService.verifyOtp(otp, hash, emailOrPhone);
+
+        if(!resData.data.sucess){
+            return res.status(resData.status).json(resData.data);
+        }
+
+
+        let user;
+
+        user = await findUser({phone: emailOrPhone})
+        
+        if(!user){
+            user = await createUser({phone: emailOrPhone})    
+            console.log("user Created")
+        }
+        console.log("user not Created") 
+
+        const {accessToken, refreshToken} = tokenService.generateToken({phone: user.phone, _id: user._id, isActivated: user.isActivated });
+
+        res.cookie('refreshToken', refreshToken, {
+            maxAge: 259200000, // 30 days in milliseconds
+            httpOnly: true
+        })
+
+        res.status(200).json({accessToken, refreshToken})
+        
+    }
     
 }
 
