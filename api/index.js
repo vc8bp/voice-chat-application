@@ -1,9 +1,10 @@
 require('dotenv').config();
+const cors = require('cors')
 const express = require('express');
 const connectToMOngo = require('./Db');
 const port = process.env.PORT || 5000
-
 const app = express();
+app.use(cors())
 app.use(express.json());
 connectToMOngo()
 

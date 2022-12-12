@@ -50,7 +50,7 @@ class OtpService {
         console.log()
         if(otp !== hashedOtp){
             console.log("inside")
-            return {data: {sucess: false, message: "Otp is not Valid"}, status: 200}
+            return {data: {sucess: false, message: "Otp is not Valid"}, status: 401}
         }
 
         

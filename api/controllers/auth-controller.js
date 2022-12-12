@@ -4,9 +4,11 @@ const { findUser, createUser } = require('../services/user-Service');
 const User = require("../models/UserSchema");
 const { use } = require('../routes');
 const tokenService = require('../services/token-service');
+const UserDto = require('../dtos/user-dto');
 require('dotenv').config();
 
 //TODO: handle more errors
+
 class AuthController {
     async sendOtp(req, res){
         const { data, type } = req.body;
@@ -22,7 +24,7 @@ class AuthController {
         if(type === "phone"){
             const resData = await OtpService.sendBySMS(data, otp)   
             console.log(resData)
-            const finalData = {...resData.data, hash: `${hashedOtp}.${otpExpire}`}
+            const finalData = {...resData.data, hash: `${hashedOtp}.${otpExpire}`, emailOrPhone: data}
             res.status(resData.status).json(finalData)
             
         } else if (type === "email") {
@@ -57,7 +59,8 @@ class AuthController {
             httpOnly: true
         })
 
-        res.status(200).json({accessToken, refreshToken})
+        const userDto  = new UserDto(user._doc)
+        res.status(200).json({...userDto, accessToken})
         
     }
     

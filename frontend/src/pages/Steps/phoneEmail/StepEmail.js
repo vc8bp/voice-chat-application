@@ -8,6 +8,9 @@ import phoneIcon from '../../../assets/images/phone.png'
 import emailIcon from '../../../assets/images/email.png'
 import phoneLight from '../../../assets/images/phoneLight.svg';
 import emailLight from '../../../assets/images/emailLight.svg';
+import { sendOtp } from '../../../http/index'
+import { useDispatch } from 'react-redux'
+import { setOtp } from '../../../store/authSlice';
 
 
 const data = {
@@ -24,20 +27,32 @@ const data = {
 }
 
 function StepEmail({onNext}) {
+
+  const dispatch = useDispatch();
+
   const [type, setType] = useState("phone");
   const Comp = data[type].comp;
 
   const [values, setValues] = useState({data: "",type: ""});
 
-  const handleClick = () => {
+  const handleClick = async () => {
     console.log(values);
     if (!values.data) {
       //TODO:  Show Error
       return console.log("this is empty")
     }
 
-    //TODO : Create Api request
-    onNext();
+    const res = await sendOtp(values)
+    if(res.status === 200){
+      dispatch(setOtp(res.data))
+      onNext();
+    } else {
+      //TODO: error handling
+      console.log("error on api call")
+    }
+
+
+    
   }
 
   return (

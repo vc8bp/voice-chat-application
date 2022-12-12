@@ -1,11 +1,13 @@
 import { Outlet, Navigate } from "react-router-dom"
-import { user } from "../DummyData"
+import { useSelector } from "react-redux";
 
 function IsActivated() {
+  const { user, isAuth} = useSelector(s => s.auth);
+  const {isActivated} = user
   return (
-    user.isAuthenticate ?      
-        user.isActivated ? <Navigate to="/rooms" /> : <Outlet/> 
-    : <Navigate to="/"/>
+    isAuth ?      
+        isActivated ? <Navigate to="/rooms" /> : <Outlet/> 
+    : <Navigate to="/authenticate"/>
   )
 }
 

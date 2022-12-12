@@ -8,22 +8,24 @@ import Activate from './pages/Activate/Activate';
 import IsActivated from './PrivateRoutes/IsActivated';
 import IsPrivate from './PrivateRoutes/IsPrivate';
 import Room from './pages/Room/Room';
+import { useSelector } from 'react-redux'
+
 
 function App() {
   return (
     <BrowserRouter>
     <Navigation/>
       <Routes>
-        <Route element={<IsGuest/>}>    
+        <Route element={<IsGuest />}>    
           <Route path='/' element={<Home/>}/>
           <Route path='/authenticate' element={<Authenticate/>} />
         </Route> 
 
-        <Route element={<IsActivated/>}>
+        <Route element={<IsActivated />}>
           <Route path='/activate' element={<Activate/>}/> 
         </Route>
 
-        <Route element={<IsPrivate/>}>
+        <Route element={<IsPrivate />}>
           <Route path='/rooms' element={<Room/>}/>
         </Route>  
         
