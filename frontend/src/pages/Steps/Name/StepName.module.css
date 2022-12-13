@@ -1,0 +1,9 @@
+p {
+    color: #C4C5C5;   
+}
+.inp {
+    margin: 10px 0px;
+    width: 300px;
+    max-width: 90%;
+    padding: 15px;
+}

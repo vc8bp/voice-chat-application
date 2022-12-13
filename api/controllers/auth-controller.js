@@ -5,6 +5,7 @@ const User = require("../models/UserSchema");
 const { use } = require('../routes');
 const tokenService = require('../services/token-service');
 const UserDto = require('../dtos/user-dto');
+const { storeRefreshToken } = require('../services/token-service');
 require('dotenv').config();
 
 //TODO: handle more errors
@@ -54,13 +55,23 @@ class AuthController {
 
         const {accessToken, refreshToken} = tokenService.generateToken({phone: user.phone, _id: user._id, isActivated: user.isActivated });
 
+        const saverefToken = await storeRefreshToken(user._id, refreshToken)
+        console.log("save is " + JSON.stringify(saverefToken))
+        if(!saverefToken){
+            return res.status(500).json({success: false, message: "internal server Error"})
+        }
+
         res.cookie('refreshToken', refreshToken, {
             maxAge: 259200000, // 30 days in milliseconds
             httpOnly: true
         })
-
+        res.cookie('accessToken', accessToken, {
+            maxAge: 259200000, // 30 days in milliseconds
+            httpOnly: true
+        })
+        
         const userDto  = new UserDto(user._doc)
-        res.status(200).json({...userDto, accessToken})
+        res.status(200).json({...userDto, auth: true})
         
     }
     

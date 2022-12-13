@@ -5,6 +5,6 @@ export const authenticateStepsTitle = {
 }
 
 export const activateStepsTitle = {
-    1: "Enter your Full name",
-    2: "Upload yoour avatar",
+    1: "👀 Enter your Full name",
+    2: "😉Okay, ",
 }

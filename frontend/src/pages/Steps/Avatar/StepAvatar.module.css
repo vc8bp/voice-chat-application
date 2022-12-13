@@ -1,0 +1,33 @@
+.subHeading {
+    color: #c4c5c5;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.avatarWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 3s ease-in-out;
+}
+
+.image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.inp {
+    display: none;
+}
+
+.avatarWrapper > label {
+    color: #0077FF;
+    cursor: pointer;
+    transition: all 3s ease-in-out;
+}
+.avatarWrapper > label :hover {
+    color: #60aaff;
+}
