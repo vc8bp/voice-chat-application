@@ -4,6 +4,7 @@
 /api/node_modules
 /api/.env
 /frontend/node_modules
+/api/controllers../activatee-controller.js
 /.pnp
 .pnp.js
 
