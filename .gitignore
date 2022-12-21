@@ -3,6 +3,7 @@
 # dependencies
 /api/node_modules
 /api/.env
+/api/storage
 /frontend/node_modules
 /api/controllers../activatee-controller.js
 /.pnp

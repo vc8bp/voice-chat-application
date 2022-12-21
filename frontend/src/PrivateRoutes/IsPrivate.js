@@ -1,15 +1,13 @@
 import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
-import { user } from '../DummyData'
 import { useSelector } from 'react-redux';
 
 function IsPrivate() {
-  const { user, isAuth} = useSelector(s => s.auth);
-  const {isActivated} = user
+  const { user, isAuth } = useSelector(s => s.auth);
   return (
     <>
     {!isAuth ? <Navigate to="/authenticate"/>
-    : !isActivated ? <Navigate to="./activate" />
+    : !user?.isActivated ? <Navigate to="./activate" />
     : <Outlet/>
     }
     </>

@@ -1,18 +1,12 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Button from '../../comonents/button/Button'
 import Card from '../../comonents/Card/Card'
 import styles from './Home.module.css'
 
 
 function Home() {
-
-
-  const linkStyle = {
-    color: "rgb(50, 50, 160)",
-    textDecoration: "none",
-
-  }
+  
   const navigate = useNavigate();
   const handleButton = () => {
     navigate("/authenticate")

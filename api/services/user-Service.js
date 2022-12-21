@@ -20,6 +20,15 @@ class UserService {
         }
     }
 
+    async findById(data) {
+        try {
+            return await User.findById(data)
+        } catch (error) {
+            console.log(error);
+            return 
+        }
+    }
+
 }
 
 module.exports = new UserService;

@@ -3,10 +3,13 @@ import Button from '../../../comonents/button/Button'
 import styles from "./StepAvatar.module.css"
 import defaultGIF from '../../../assets/images/defaultGIF.js'
 import { activateAccount } from '../../../http/index'
-import { useSelector, useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setAuth } from '../../../store/authSlice'
+import { useNavigate } from 'react-router-dom'
 
 function StepAvatar({onNext}) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {name} = useSelector(s => s.activate)
   const [image, setImage] = useState(defaultGIF);
   const [type, setType] = useState('gif');
@@ -23,8 +26,11 @@ function StepAvatar({onNext}) {
 
   const handleSubmit = async () => {
     try {
-
-      const { data } = activateAccount({name, image, type})     
+      const {data} = await activateAccount({name, image, type})   
+      console.log(data) 
+      if(data.auth === true){
+        dispatch(setAuth(data.user)) 
+      } 
     } catch (error) {
       console.log(error)
     }

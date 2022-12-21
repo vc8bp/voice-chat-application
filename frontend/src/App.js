@@ -8,8 +8,6 @@ import Activate from './pages/Activate/Activate';
 import IsActivated from './PrivateRoutes/IsActivated';
 import IsPrivate from './PrivateRoutes/IsPrivate';
 import Room from './pages/Room/Room';
-import { useSelector } from 'react-redux'
-
 
 function App() {
   return (

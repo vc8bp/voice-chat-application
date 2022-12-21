@@ -15,6 +15,8 @@ app.use(express.json({
 }));
 connectToMOngo()
 
+app.use('/storage', express.static('storage'))
+
 app.use("/api", require("./routes"))
 app.get("/", (req,res) => [
     res.send("hello world")

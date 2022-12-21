@@ -26,7 +26,7 @@ function Activate() {
   
   return (
     <div  className={`container flexCenter ${styles.main}`}>
-      <Card title={step == 1 ? activateStepsTitle[step] : (activateStepsTitle[step] + UserName )}>
+      <Card title={step === 1 ? activateStepsTitle[step] : (activateStepsTitle[step] + UserName )}>
         <Comp onNext={onNext}/>
       </Card>   
     </div>
