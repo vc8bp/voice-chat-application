@@ -74,7 +74,55 @@ class AuthController {
         res.status(200).json({...userDto, auth: true})
         
     }
+
+    async refresh(req, res) {
+        const { refreshToken: refreshTokenFromCookie } = req.cookies;
+        let userData;
+        try {
+            userData = await tokenService.verifyRefreshToken(refreshTokenFromCookie)
+        } catch (error) {
+            return res.status(401).json({success: "false", message: "invalid Token"})
+        }
+
+        const user = await userService.findUser({_id: userData._id})
+        if(!user) {
+            return res.status(404).json({success: "false", message: "user not found"})
+        }
+
+        try {            
+            const token = await tokenService.findRefreshToken(userData._id, refreshTokenFromCookie)
+            if(!token) {
+                return res.status(401).json({success: "false", message: "invalid Token"})
+            }
+        } catch (error) {
+            return res.status(500).json({success: "false", message: "iinternal server Error"})
+        }
+
+        const {refreshToken, accessToken} = tokenService.generateToken({_id: userData._id, phone: userData.phone, isActivated: userData.isActivated})
+
+        try {
+            await tokenService.updateRefreshToken(userData._id, refreshToken)
+        } catch (error) {
+            return res.status(500).json({success: "false", message: "iinternal server Error"})
+        }
+
+
+        res.cookie('refreshToken', refreshToken, {
+            maxAge: 259200000, // 30 days in milliseconds
+            httpOnly: true
+        })
+        res.cookie('accessToken', accessToken, {
+            maxAge: 259200000, // 30 days in milliseconds
+            httpOnly: true
+        })
+        
+        const userDto  = new UserDto(user._doc)
+        res.status(200).json({...userDto, auth: true})
+        
+    }
     
 }
+
+
 
 module.exports = new AuthController();

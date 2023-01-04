@@ -6,5 +6,6 @@ const authMiddleware = require('./middlewares/auth-middleware')
 router.post("/send-otp", authController.sendOtp)
 router.post("/verify-otp", authController.otpVerify)
 router.post("/activate", authMiddleware, activateController.activate)
+router.post('/refresh', authController.refresh)
 
 module.exports = router

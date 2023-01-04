@@ -1,13 +1,15 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
+const refreshTokenSchema = require('../models/refreshTokenSchema');
 const RefreshTokenSchema = require('../models/refreshTokenSchema');
+const UserSchema = require('../models/UserSchema');
 const jwtAccessToken = process.env.JWT_SECRET
 const jwtRefreshTOken = process.env.JWT_REFRASH_SECRET
 
 class TokenService {
     generateToken(payload) {
         const accessToken = jwt.sign(payload, jwtAccessToken, {
-            expiresIn: '1h'
+            expiresIn: '1m'
         })
 
         const refreshToken = jwt.sign(payload, jwtRefreshTOken, {
@@ -32,5 +34,16 @@ class TokenService {
         return jwt.verify(token, jwtAccessToken)     
     }
 
+    async verifyRefreshToken(token) {
+        return jwt.verify(token, jwtRefreshTOken)     
+    }
+
+    async findRefreshToken(userID, refreshTokken) {
+        return await refreshTokenSchema.findOne({userID, token: refreshTokken})
+    }
+
+    async updateRefreshToken(userID, refreshToken) {
+        return await refreshTokenSchema.updateOne({userID}, {token: refreshToken})
+    }
 }
 module.exports = new TokenService();
